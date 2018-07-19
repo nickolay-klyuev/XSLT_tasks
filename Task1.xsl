@@ -43,18 +43,40 @@
 
 <xsl:template name="test3">
 	<xsl:param name="tourist-string" />
-	<xsl:param name="tourist-string-before" select="substring-before($tourist-string, '/')" />
-	<xsl:param name="tourist-string-after" select="substring-after($tourist-string, '/')" />
+	<xsl:param name="type-code" select="substring-before($tourist-string, '/')" />
+	<xsl:param name="after-type-code" select="substring-after($tourist-string, '/')" />
+	<xsl:param name="birth-date" select="substring-before($after-type-code, '/')" />
+	<xsl:param name="after-birth-date" select="substring-after($after-type-code, '/')" />
+	<xsl:param name="surname" select="substring-before($after-birth-date, '/')" />
+	<xsl:param name="after-surname" select="substring-after($after-birth-date, '/')" />
+	<xsl:param name="name" select="substring-before($after-surname, '/')" />
+	<xsl:param name="prefix" select="substring-after($after-surname, '/')" />
 
-	<xsl:if test="$tourist-string-before = 10">
-		<tourist type="ADT"></tourist>
-	</xsl:if>
-	<xsl:if test="$tourist-string-before = 8">
-		<tourist type="CHD"></tourist>
-	</xsl:if>
-	<xsl:if test="$tourist-string-before = 7">
-		<tourist type="INF"></tourist>
-	</xsl:if>
+	<tourist>
+		<xsl:if test="$type-code = 10">
+			<xsl:attribute name="type">ADT</xsl:attribute>
+		</xsl:if>
+		<xsl:if test="$type-code = 8">
+			<xsl:attribute name="type">CHD</xsl:attribute>
+		</xsl:if>
+		<xsl:if test="$type-code = 7">
+			<xsl:attribute name="type">INF</xsl:attribute>
+		</xsl:if>
+
+		<xsl:if test="$birth-date != 'null'">
+			<xsl:attribute name="birthDate"><xsl:value-of select="$birth-date" /></xsl:attribute>
+		</xsl:if>
+
+		<prefix>
+			<xsl:value-of select="$prefix" />
+		</prefix>
+		<name>
+			<xsl:value-of select="$name" />
+		</name>
+		<surname>
+			<xsl:value-of select="$surname" />
+		</surname>
+	</tourist>
 </xsl:template>
 	
 </xsl:stylesheet>
