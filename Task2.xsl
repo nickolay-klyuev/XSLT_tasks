@@ -11,21 +11,31 @@
 	<xsl:variable name="str3" select="string(root/str3)" />
 	<xsl:variable name="str4" select="string(root/str4)" />
 
-	<xsl:call-template name="reverse">
-		<xsl:with-param name="input" select="$str1" />
-	</xsl:call-template>
+	<root>
+		<str1>
+			<xsl:call-template name="reverse">
+				<xsl:with-param name="input" select="$str1" />
+			</xsl:call-template>
+		</str1>
 
-	<xsl:call-template name="numbers">
-		<xsl:with-param name="input" select="$str2" />
-	</xsl:call-template>
+		<str2>
+			<xsl:call-template name="numbers">
+				<xsl:with-param name="input" select="$str2" />
+			</xsl:call-template>
+		</str2>
 
-	<xsl:call-template name="without-numbers">
-		<xsl:with-param name="input" select="$str3" />
-	</xsl:call-template>
+		<str3>
+			<xsl:call-template name="without-numbers">
+				<xsl:with-param name="input" select="$str3" />
+			</xsl:call-template>
+		</str3>
 
-	<xsl:call-template name="space">
-		<xsl:with-param name="input" select="$str4" />
-	</xsl:call-template>
+		<str4>
+			<xsl:call-template name="space">
+				<xsl:with-param name="input" select="$str4" />
+			</xsl:call-template>
+		</str4>
+	</root>
 
 </xsl:template>
 
