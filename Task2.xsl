@@ -8,6 +8,7 @@
 
 	<xsl:variable name="str1" select="string(root/str1)" />
 	<xsl:variable name="str2" select="string(root/str2)" />
+	<xsl:variable name="str3" select="string(root/str3)" />
 
 	<xsl:call-template name="reverse">
 		<xsl:with-param name="input" select="$str1" />
@@ -15,6 +16,10 @@
 
 	<xsl:call-template name="numbers">
 		<xsl:with-param name="input" select="$str2" />
+	</xsl:call-template>
+
+	<xsl:call-template name="without-numbers">
+		<xsl:with-param name="input" select="$str3" />
 	</xsl:call-template>
 
 </xsl:template>
@@ -51,6 +56,11 @@
 <xsl:template name="numbers">
 	<xsl:param name="input" />
 	<xsl:value-of select="translate($input, translate($input,'0123456789', ''), '')" />
+</xsl:template>
+
+<xsl:template name="without-numbers">
+	<xsl:param name="input" />
+	<xsl:value-of select="translate($input, '0123456789', '')" />
 </xsl:template>
 
 </xsl:stylesheet>
