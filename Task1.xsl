@@ -8,7 +8,7 @@
 
 		<xsl:for-each select="list/tourists">
 			<touristGroup>
-				<xsl:call-template name="test">
+				<xsl:call-template name="main">
 				</xsl:call-template>
 			</touristGroup>
 		</xsl:for-each>
@@ -17,31 +17,31 @@
 
 </xsl:template>
 
-<xsl:template name="test">
+<xsl:template name="main">
 	<xsl:param name="group-string" select="text()" />
 	
-	<xsl:call-template name="test2">
+	<xsl:call-template name="string-division">
 		<xsl:with-param name="string" select="$group-string" />
 	</xsl:call-template>
 </xsl:template>
 
-<xsl:template name="test2">
+<xsl:template name="string-division">
 	<xsl:param name="string" />
 	<xsl:param name="string-before" select="substring-before($string, '|')" />
 	<xsl:param name="string-after" select="substring-after($string, '|')" />
 
-	<xsl:call-template name="test3">
+	<xsl:call-template name="tourist">
 		<xsl:with-param name="tourist-string" select="$string-before" />
 	</xsl:call-template>
 
 	<xsl:if test="$string-after != ''">
-		<xsl:call-template name="test2">
+		<xsl:call-template name="string-division">
 			<xsl:with-param name="string" select="$string-after" />
 		</xsl:call-template>
 	</xsl:if>
 </xsl:template>
 
-<xsl:template name="test3">
+<xsl:template name="tourist">
 	<xsl:param name="tourist-string" />
 	<xsl:param name="type-code" select="substring-before($tourist-string, '/')" />
 	<xsl:param name="after-type-code" select="substring-after($tourist-string, '/')" />
